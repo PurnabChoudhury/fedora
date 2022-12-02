@@ -9,17 +9,9 @@ echo "clearing cache...."
 dnf clean all
 echo "configuring rpm-fusion and installing media and video codecs"
 echo "this may take a while...."
-dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm 
-dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-dnf groupupdate core
-dnf groupupdate sound-and-video
-echo "upgrade the system??"
-echo "enter(y/n):"
-read choice
-yes = "y"
-no = "n"
-if (($choice == $yes))
-then
-    dnf distro-sync
-fi
+dnf groupupdate multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin -y
+dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm -y
+dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm -y
+dnf groupupdate core -y
+dnf groupupdate sound-and-video -y
+dnf distro-sync -y
