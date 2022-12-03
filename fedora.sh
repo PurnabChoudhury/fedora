@@ -1,8 +1,5 @@
 #!/bin/bash
 echo "Thanks for using Purnab's fedora 'MUST DO!' script"
-echo "Enter new host name: "
-read host_name
-hostnamectl set-hostname "$host_name"
 echo "optimizing dnf......"
 echo -e "\nmax_parallel_downloads=10\ndefaultyes=True\nkeepcache=True" >> /etc/dnf/dnf.conf
 echo "clearing cache...."
@@ -15,3 +12,5 @@ dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-relea
 dnf groupupdate core -y
 dnf groupupdate sound-and-video -y
 dnf distro-sync -y
+echo "swapping msa-va-drivers......"
+dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
