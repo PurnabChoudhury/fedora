@@ -10,8 +10,13 @@ dnf install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-relea
 dnf groupupdate core -y
 dnf groupupdate sound-and-video -y
 dnf distro-sync -y
-echo "swapping msa-va-drivers......"
-dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+read -p "amd graphics?(y/n): " userinp
+if($userinp -eq "y")
+then
+  echo "swapping msa-va-drivers......"
+  dnf swap mesa-va-drivers mesa-va-drivers-freeworld -y
+fi
 echo "adding flathub"
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 echo "done!!"
+echo "reboot is rewuired for flatpak to work"
